@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200, initial-scale=1">
+<title>Rajka15 — Combined Activity Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Exo+2:wght@300;400;600;700&display=swap');
+
+  :root {
+    --bg: #07090d;
+    --panel: #0e1218;
+    --panel2: #131923;
+    --border: #1c2838;
+    --border2: #243246;
+    --blue: #00b4d8;
+    --blue-dim: #0077b6;
+    --orange: #ff7f3f;
+    --orange-dim: #c54f15;
+    --green: #00e676;
+    --red: #ff4757;
+    --yellow: #ffd60a;
+    --purple: #b69cff;
+    --text: #d4e0ee;
+    --text-dim: #8aa0b8;
+    --dim: #4a6280;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    padding: 0;
+    background-image:
+      radial-gradient(ellipse 50% 35% at 12% 5%, rgba(0,180,216,0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 35% at 88% 95%, rgba(255,127,63,0.06) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 25% at 50% 50%, rgba(0,230,118,0.02) 0%, transparent 70%);
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 24px 40px;
+  }
+
+  /* === HEADER === */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border2);
+  }
+  .h-left { border-left: 4px solid var(--blue); padding-left: 22px; }
+  .h-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--blue);
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .h-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1.5px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .h-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+  }
+  .h-badge {
+    background: linear-gradient(135deg, rgba(0,230,118,0.15), rgba(0,230,118,0.02));
+    border: 1px solid rgba(0,230,118,0.35);
+    border-radius: 6px;
+    padding: 14px 22px;
+    text-align: right;
+  }
+  .h-badge .big {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--green);
+    display: block;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+  .h-badge .sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* === VERDICT BANNER === */
+  .verdict {
+    background: linear-gradient(90deg, rgba(0,230,118,0.12) 0%, rgba(0,230,118,0.02) 100%);
+    border: 1px solid rgba(0,230,118,0.3);
+    border-left: 5px solid var(--green);
+    border-radius: 6px;
+    padding: 16px 22px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .verdict-icon {
+    font-size: 26px;
+    color: var(--green);
+  }
+  .verdict-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+  }
+  .verdict-text strong { color: var(--green); }
+
+  /* === SOURCE BOXES === */
+  .sources {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+    align-items: stretch;
+  }
+  .src-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .src-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+  .src-box.orange::before { background: var(--orange); }
+  .src-box.blue::before { background: var(--blue); }
+  .src-box.green::before { background: var(--green); }
+  .src-box.yellow::before { background: var(--yellow); }
+  .src-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.5px;
+  }
+  .src-num.orange { color: var(--orange); }
+  .src-num.blue { color: var(--blue); }
+  .src-num.green { color: var(--green); }
+  .src-num.yellow { color: var(--yellow); }
+  .src-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .src-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--dim);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+  .src-op {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 24px;
+    color: var(--dim);
+    font-weight: 300;
+  }
+
+  /* === GRID LAYOUTS === */
+  .row { display: grid; gap: 14px; margin-bottom: 14px; }
+  .row.c2 { grid-template-columns: 1fr 1fr; }
+  .row.c2b { grid-template-columns: 1.45fr 1fr; }
+  .row.c3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .panel-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .panel-title .accent { color: var(--text-dim); font-size: 9px; }
+
+  /* === HEATMAP === */
+  .hm-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 3px;
+    height: 16px;
+  }
+  .hm-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--dim);
+    width: 36px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .hm-bar-bg {
+    flex: 1;
+    height: 13px;
+    background: rgba(255,255,255,0.025);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hm-bar-orange {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    background: var(--orange);
+    opacity: 0.85;
+    border-radius: 2px;
+  }
+  .hm-bar-blue {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: var(--blue);
+    opacity: 0.85;
+    border-radius: 2px;
+  }
+  .hm-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--text-dim);
+    width: 40px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .hm-row.sleep .hm-bar-bg {
+    background: rgba(255,71,87,0.06);
+  }
+  .hm-row.sleep .hm-time {
+    color: var(--red);
+    opacity: 0.6;
+  }
+  .hm-row.peak .hm-time {
+    color: var(--green);
+  }
+  .sleep-marker {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    opacity: 0.7;
+    letter-spacing: 2px;
+    padding: 4px 0;
+    margin: 2px 0;
+    border-top: 1px dashed rgba(255,71,87,0.2);
+    border-bottom: 1px dashed rgba(255,71,87,0.2);
+    background: rgba(255,71,87,0.03);
+  }
+  .hm-legend {
+    display: flex;
+    gap: 18px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .hm-leg {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .hm-leg .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+  }
+
+  /* === BROWSE CATEGORIES === */
+  .browse-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 9px;
+  }
+  .browse-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text);
+    width: 100px;
+    flex-shrink: 0;
+  }
+  .browse-bg {
+    flex: 1;
+    height: 10px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .browse-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .browse-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* === DAY TABLE === */
+  .day-table { width: 100%; border-collapse: collapse; }
+  .day-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--dim);
+    padding: 0 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .day-table th.right { text-align: right; }
+  .day-table td { padding: 7px 8px; vertical-align: middle; }
+  .day-table tbody tr { border-bottom: 1px solid rgba(28,40,56,0.6); }
+  .day-table tbody tr:hover { background: rgba(255,255,255,0.015); }
+  .date-c {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .num-c {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: right;
+  }
+  .num-c.orange { color: var(--orange); }
+  .num-c.blue { color: var(--blue); }
+  .num-c.green { color: var(--green); }
+  .gain-c {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--green);
+    text-align: right;
+    font-weight: 500;
+  }
+  .bar-wrap-td { width: 28%; min-width: 180px; }
+  .stack-bar {
+    display: flex;
+    height: 7px;
+    border-radius: 2px;
+    overflow: hidden;
+    gap: 1px;
+  }
+  .stack-bar .seg-o { background: var(--orange); opacity: 0.85; }
+  .stack-bar .seg-b { background: var(--blue); opacity: 0.85; }
+
+  .day-table tfoot td {
+    border-top: 2px solid var(--border2);
+    padding-top: 12px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  /* === KEY FINDINGS === */
+  .finding {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .finding:last-child { border: none; padding-bottom: 0; }
+  .finding:first-child { padding-top: 0; }
+  .finding-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    width: 32px;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .finding-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 5px;
+    letter-spacing: 0.3px;
+  }
+  .finding-text {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .hi { color: var(--blue); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; }
+  .hi-g { color: var(--green); }
+  .hi-o { color: var(--orange); }
+  .hi-r { color: var(--red); }
+
+  /* === HIGHLIGHT BOX === */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(255,127,63,0.08), rgba(255,127,63,0.01));
+    border: 1px solid rgba(255,127,63,0.3);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+  }
+  .hl-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .hl-content {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  .hl-side {
+    text-align: center;
+  }
+  .hl-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .hl-num.red { color: var(--red); }
+  .hl-num.green { color: var(--green); }
+  .hl-lbl {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .hl-arrow {
+    font-size: 28px;
+    color: var(--orange);
+    opacity: 0.6;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--dim);
+    letter-spacing: 1px;
+    line-height: 1.8;
+    text-align: center;
+  }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .container { padding: 12px; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="h-left">
+      <div class="h-eyebrow">⬢ WarEra.io  //  Combined Evidence Report  //  Appeal Case</div>
+      <div class="h-title">RAJKA15 — HUMAN ACTIVITY PROOF</div>
+      <div class="h-sub">User ID: 69917  |  16 flagged dates (Mar–Apr 2026)  |  Generated 2026-05-21</div>
+    </div>
+    <div class="h-badge">
+      <span class="big">✓ INNOCENT</span>
+      <div class="sub">Two independent data sources<br>confirm continuous presence</div>
+    </div>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="verdict">
+    <div class="verdict-icon">●</div>
+    <div class="verdict-text">
+      <strong>5,141 combined data points</strong> across 16 flagged dates. Average <strong>17.2 active hours/day</strong> from two independent sources. Browser + Discord patterns are <strong>identical to a human player</strong> — not an automated script.
+    </div>
+  </div>
+
+  <!-- SOURCES MATH -->
+  <div class="sources">
+    <div class="src-box orange">
+      <div class="src-num orange">3,104</div>
+      <div class="src-label">Browser visits</div>
+      <div class="src-sub">FIREFOX — SKY HISTORY EXPORT</div>
+    </div>
+    <div class="src-op">+</div>
+    <div class="src-box blue">
+      <div class="src-num blue">2,037</div>
+      <div class="src-label">Discord messages</div>
+      <div class="src-sub">DISCORDCHATEXPORTER.CLI</div>
+    </div>
+    <div class="src-op">=</div>
+    <div class="src-box green">
+      <div class="src-num green">5,141</div>
+      <div class="src-label">Combined data points</div>
+      <div class="src-sub">TWO INDEPENDENT SOURCES</div>
+    </div>
+    <div class="src-op">→</div>
+    <div class="src-box yellow">
+      <div class="src-num yellow">+107h</div>
+      <div class="src-label">Extra hours browser proves</div>
+      <div class="src-sub">FILLS EVERY DISCORD GAP</div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHT BOX - MARCH 23 -->
+  <div class="highlight-box">
+    <div class="hl-label">⚠ THE SMOKING GUN — MARCH 23, 2026</div>
+    <div class="hl-content">
+      <div class="hl-side">
+        <div class="hl-num red">4</div>
+        <div class="hl-lbl">Discord messages only<br>(looks "inactive" to the bot detector)</div>
+      </div>
+      <div class="hl-arrow">→</div>
+      <div class="hl-side">
+        <div class="hl-num green">18.4h</div>
+        <div class="hl-lbl">Browser active span<br>+ 26 War Era page visits</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:14px; font-size:12px; color:var(--text-dim); font-style:italic; line-height:1.5;">
+      The automated system saw only Discord silence and flagged him. Browser history proves <span style="color:var(--green); font-weight:600">18 hours of real, active gameplay</span> the same day.
+    </div>
+  </div>
+
+  <!-- HEATMAP + CATEGORIES -->
+  <div class="row c2b">
+
+    <!-- HEATMAP -->
+    <div class="panel">
+      <div class="panel-title">
+        <span>⬢ Combined 24h Heatmap — All 16 Flagged Days</span>
+        <span class="accent">Browser + Discord overlay</span>
+      </div>
+      <div id="heatmap"></div>
+      <div class="hm-legend">
+        <div class="hm-leg"><div class="dot" style="background:var(--orange); opacity:0.85"></div>Browser visits</div>
+        <div class="hm-leg"><div class="dot" style="background:var(--blue); opacity:0.85"></div>Discord messages</div>
+        <div class="hm-leg"><div class="dot" style="background:rgba(255,71,87,0.3)"></div>Sleep gap (human pattern)</div>
+      </div>
+    </div>
+
+    <!-- BROWSE CATEGORIES + CHANNELS -->
+    <div class="panel">
+      <div class="panel-title">⬢ Browser Categories</div>
+      <div id="browseCats"></div>
+
+      <div class="panel-title" style="margin-top:18px">⬢ Discord Channels (Top 10)</div>
+      <div id="discordChannels"></div>
+    </div>
+
+  </div>
+
+  <!-- DAY TABLE -->
+  <div class="panel" style="margin-bottom:14px">
+    <div class="panel-title">
+      <span>⬢ Per-Day Breakdown — Browser vs Discord vs Combined Span</span>
+      <span class="accent">Sorted chronologically</span>
+    </div>
+    <table class="day-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th class="right">Browser</th>
+          <th class="right">Discord</th>
+          <th>Activity Mix</th>
+          <th class="right">D. Span</th>
+          <th class="right">Combined</th>
+          <th class="right">Gain</th>
+        </tr>
+      </thead>
+      <tbody id="dayBody"></tbody>
+      <tfoot>
+        <tr>
+          <td><span style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-dim); letter-spacing:1px;">TOTAL — 16 DAYS</span></td>
+          <td class="num-c orange">3,104</td>
+          <td class="num-c blue">2,037</td>
+          <td></td>
+          <td class="num-c" style="color:var(--text-dim)">168.0h</td>
+          <td class="num-c green">275.0h</td>
+          <td class="gain-c">+107.0h</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- KEY FINDINGS -->
+  <div class="row c2">
+    <div class="panel">
+      <div class="panel-title">⬢ Key Findings</div>
+      <div class="finding">
+        <div class="finding-icon">🔗</div>
+        <div>
+          <div class="finding-title">Two Independent Sources Corroborate</div>
+          <div class="finding-text">Browser history and Discord exports are collected by separate tools — they cannot be coordinated or faked. <span class="hi hi-g">Both show identical patterns</span>: active evenings, sleep gap 04–07h, tabs between game/YouTube/Reddit.</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-icon">😴</div>
+        <div>
+          <div class="finding-title">Sleep Gap — Every Single Day</div>
+          <div class="finding-text">Hours 04:00–07:00 show <span class="hi hi-r">zero Discord activity</span> and minimal browser visits across <strong>all 16 days</strong>. Peak at 23:00 = 511 events. Sleep at 04:00 = 9 events. <span class="hi">Bots do not sleep. Scripts do not pause.</span></div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-icon">🎮</div>
+        <div>
+          <div class="finding-title">884 Direct War Era Page Visits</div>
+          <div class="finding-text">27% of browsing was on <span class="hi hi-o">app.warera.io directly</span> — market, profiles, articles. Spread across all waking hours, present even in hours with no Discord messages. Active manual play, not background scripts.</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-icon">🌐</div>
+        <div>
+          <div class="finding-title">Human Browsing Profile</div>
+          <div class="finding-text">YouTube (40.9%), War Era (28.5%), Reddit (16%) — a real gamer tabbing between game, entertainment, and social media. <span class="hi">No automation tools. No suspicious traffic.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">⬢ What This Means for the Ban</div>
+      <div class="finding">
+        <div class="finding-icon">⚖️</div>
+        <div>
+          <div class="finding-title">Ban Issued Before Investigation</div>
+          <div class="finding-text">Admin ArturoJ acknowledged ticket overflow has been ongoing for <span class="hi">2 months</span>. Rajka was banned on suspicion alone — the evidence to clear him was available the entire time, but no one looked.</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-icon">🔁</div>
+        <div>
+          <div class="finding-title">Same Accusations, Previously Cleared</div>
+          <div class="finding-text">Rajka was flagged for the same trading behaviour weeks ago — submitted video proof, was <span class="hi hi-g">cleared as innocent</span>. The new ban repeats the original mistake on a player who already proved his case.</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-icon">💬</div>
+        <div>
+          <div class="finding-title">Active Community Contributor</div>
+          <div class="finding-text">During the flagged period: <strong>871 messages</strong> in #trgovina teaching market mechanics, <strong>199 messages</strong> helping new players, <strong>published a WarEra tutorial video on YouTube</strong>. Not the profile of a script abuser.</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-icon">✓</div>
+        <div>
+          <div class="finding-title">Requested Action</div>
+          <div class="finding-text"><span class="hi hi-g">Immediate unban</span> based on overwhelming evidence. Review of the "ban-then-investigate" policy. Permanent fix for the Croatian ISP shared-IP issue that has affected multiple players.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    ⬢ EVIDENCE COMPILED 2026-05-21 &nbsp;|&nbsp; SOURCES: FIREFOX BROWSER HISTORY VIA SKY HISTORY EXPORT + DISCORD EXPORT VIA DISCORDCHATEXPORTER.CLI &nbsp;|&nbsp; SERVER: WAR ERA CROATIA<br>
+    PRIVACY: OAUTH FLOWS, EMAILS, SOCIAL MEDIA, AND UNRELATED DOWNLOADS REDACTED. ACTIVITY TIMESTAMPS UNAFFECTED.
+  </div>
+
+</div>
+
+<script>
+  // === HEATMAP DATA ===
+  const hourlyData = [
+    {h:0, b:180, d:152},
+    {h:1, b:245, d:128},
+    {h:2, b:127, d:57},
+    {h:3, b:103, d:60},
+    {h:4, b:9, d:0},
+    {h:5, b:33, d:0},
+    {h:6, b:18, d:0},
+    {h:7, b:63, d:0},
+    {h:8, b:45, d:2},
+    {h:9, b:92, d:29},
+    {h:10, b:108, d:38},
+    {h:11, b:113, d:9},
+    {h:12, b:137, d:17},
+    {h:13, b:113, d:56},
+    {h:14, b:138, d:84},
+    {h:15, b:120, d:101},
+    {h:16, b:140, d:65},
+    {h:17, b:94, d:85},
+    {h:18, b:209, d:149},
+    {h:19, b:96, d:155},
+    {h:20, b:158, d:275},
+    {h:21, b:210, d:221},
+    {h:22, b:203, d:193},
+    {h:23, b:350, d:161}
+  ];
+
+  const maxTotal = Math.max(...hourlyData.map(d => d.b + d.d));
+  const hm = document.getElementById('heatmap');
+
+  hourlyData.forEach(d => {
+    const isSleep = d.h >= 4 && d.h <= 7;
+    const isPeak = (d.h >= 20 && d.h <= 23) || d.h === 18;
+    const total = d.b + d.d;
+    const bPct = (d.b / maxTotal) * 100;
+    const dPct = (d.d / maxTotal) * 100;
+
+    const row = document.createElement('div');
+    row.className = 'hm-row' + (isSleep ? ' sleep' : '') + (isPeak ? ' peak' : '');
+    row.innerHTML = `
+      <div class="hm-time">${String(d.h).padStart(2,'0')}:00</div>
+      <div class="hm-bar-bg">
+        <div class="hm-bar-orange" style="width:${bPct}%"></div>
+        <div class="hm-bar-blue" style="left:${bPct}%; width:${dPct}%"></div>
+      </div>
+      <div class="hm-count">${total}</div>
+    `;
+    hm.appendChild(row);
+
+    if (d.h === 3) {
+      const mk = document.createElement('div');
+      mk.className = 'sleep-marker';
+      mk.textContent = '▼  SLEEP GAP — 04:00–07:00 — HUMAN PATTERN  ▼';
+      hm.appendChild(mk);
+    }
+  });
+
+  // === BROWSE CATEGORIES ===
+  const browseCats = [
+    {name:'YouTube', count:1269, pct:40.9, color:'#ff4757'},
+    {name:'War Era', count:884, pct:28.5, color:'#ff7f3f'},
+    {name:'Reddit', count:498, pct:16.0, color:'#ff8b3f'},
+    {name:'Other', count:279, pct:9.0, color:'#8aa0b8'},
+    {name:'Google', count:90, pct:2.9, color:'#4a6280'},
+    {name:'Discord', count:69, pct:2.2, color:'#00b4d8'},
+    {name:'WarEraStats', count:10, pct:0.3, color:'#b69cff'},
+    {name:'AI Tools', count:5, pct:0.2, color:'#b69cff'}
+  ];
+  const maxBrowse = browseCats[0].count;
+  const bc = document.getElementById('browseCats');
+  browseCats.forEach(c => {
+    bc.innerHTML += `
+      <div class="browse-item">
+        <div class="browse-name">${c.name}</div>
+        <div class="browse-bg">
+          <div class="browse-fill" style="width:${c.count/maxBrowse*100}%; background:${c.color}; opacity:0.85"></div>
+        </div>
+        <div class="browse-count">${c.count.toLocaleString()} (${c.pct}%)</div>
+      </div>
+    `;
+  });
+
+  // === DISCORD CHANNELS ===
+  const channels = [
+    {name:'#trgovina', count:871},
+    {name:'#chat-svih-hrvata', count:616},
+    {name:'#splickov-kutak', count:199},
+    {name:'#vlada', count:188},
+    {name:'#cavrljaonica', count:97},
+    {name:'#welcome-to-croatia', count:22},
+    {name:'#komanderi', count:16},
+    {name:'#giveaway', count:13},
+    {name:'#novine', count:10},
+    {name:'#4-gardijska', count:5}
+  ];
+  const maxCh = channels[0].count;
+  const dc = document.getElementById('discordChannels');
+  channels.forEach(c => {
+    dc.innerHTML += `
+      <div class="browse-item">
+        <div class="browse-name">${c.name}</div>
+        <div class="browse-bg">
+          <div class="browse-fill" style="width:${c.count/maxCh*100}%; background:var(--blue); opacity:0.8"></div>
+        </div>
+        <div class="browse-count">${c.count}</div>
+      </div>
+    `;
+  });
+
+  // === DAY TABLE ===
+  const days = [
+    {d:'17 Mar', dow:'Tue', b:114, m:20, ds:'6.8h', c:'18.3h', g:'+11.5h'},
+    {d:'20 Mar', dow:'Fri', b:93, m:29, ds:'5.8h', c:'17.3h', g:'+11.5h'},
+    {d:'22 Mar', dow:'Sun', b:359, m:95, ds:'11.7h', c:'19.7h', g:'+8.0h'},
+    {d:'23 Mar', dow:'Mon', b:222, m:4, ds:'2.2h', c:'18.4h', g:'+16.1h', highlight:true},
+    {d:'24 Mar', dow:'Tue', b:81, m:167, ds:'14.9h', c:'17.1h', g:'+2.2h'},
+    {d:'25 Mar', dow:'Wed', b:54, m:112, ds:'12.4h', c:'13.9h', g:'+1.6h'},
+    {d:'27 Mar', dow:'Fri', b:182, m:176, ds:'13.3h', c:'14.9h', g:'+1.5h'},
+    {d:'01 Apr', dow:'Wed', b:330, m:95, ds:'13.6h', c:'17.8h', g:'+4.3h'},
+    {d:'02 Apr', dow:'Thu', b:254, m:147, ds:'7.9h', c:'19.0h', g:'+11.1h'},
+    {d:'04 Apr', dow:'Sat', b:210, m:38, ds:'9.2h', c:'14.7h', g:'+5.5h'},
+    {d:'06 Apr', dow:'Mon', b:168, m:63, ds:'8.7h', c:'17.0h', g:'+8.3h'},
+    {d:'11 Apr', dow:'Sat', b:169, m:111, ds:'11.6h', c:'18.7h', g:'+7.1h'},
+    {d:'21 Apr', dow:'Tue', b:206, m:217, ds:'9.7h', c:'16.3h', g:'+6.6h'},
+    {d:'22 Apr', dow:'Wed', b:149, m:206, ds:'15.0h', c:'18.3h', g:'+3.3h'},
+    {d:'26 Apr', dow:'Sun', b:227, m:298, ds:'11.9h', c:'16.1h', g:'+4.2h'},
+    {d:'27 Apr', dow:'Mon', b:286, m:259, ds:'13.3h', c:'17.6h', g:'+4.3h'}
+  ];
+
+  const dayBody = document.getElementById('dayBody');
+  const maxBM = Math.max(...days.map(x => x.b + x.m));
+
+  days.forEach(d => {
+    const total = d.b + d.m;
+    const bPct = (d.b / maxBM) * 100;
+    const mPct = (d.m / maxBM) * 100;
+    const hlStyle = d.highlight ? 'background: rgba(255,71,87,0.04); border-left: 3px solid var(--red);' : '';
+    const hlIcon = d.highlight ? '<span style="color:var(--red); margin-right:4px">▶</span>' : '';
+
+    dayBody.innerHTML += `
+      <tr style="${hlStyle}">
+        <td class="date-c">${hlIcon}<span style="color:var(--text-dim); font-size:9px; margin-right:6px;">${d.dow}</span>${d.d}</td>
+        <td class="num-c orange">${d.b}</td>
+        <td class="num-c blue">${d.m}</td>
+        <td class="bar-wrap-td">
+          <div class="stack-bar">
+            <div class="seg-o" style="width:${bPct}%"></div>
+            <div class="seg-b" style="width:${mPct}%"></div>
+          </div>
+        </td>
+        <td class="num-c" style="color:var(--text-dim)">${d.ds}</td>
+        <td class="num-c green">${d.c}</td>
+        <td class="gain-c">${d.g}</td>
+      </tr>
+    `;
+  });
+</script>
+
+</body>
+</html>
